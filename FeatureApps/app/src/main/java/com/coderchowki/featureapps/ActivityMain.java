@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import com.firebase.client.Firebase;
 import com.firebase.ui.FirebaseRecyclerAdapter;
 
 public class ActivityMain extends AppCompatActivity {
@@ -14,11 +15,15 @@ public class ActivityMain extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Firebase.setAndroidContext(this);
+
+        Firebase ref = new Firebase("https://woodroom.firebaseio.com/msg");
+
         RecyclerView recycler = (RecyclerView) findViewById(R.id.messages_recycler);
         recycler.setHasFixedSize(true);
         recycler.setLayoutManager(new LinearLayoutManager(this));
 
-        FirebaseRecyclerAdapter mAdapter = new FirebaseRecyclerAdapter<ChatMessage, CMViewHolder>(ChatMessage.class, android.R.layout.two_line_list_item, CMViewHolder.class, mRef) {
+        FirebaseRecyclerAdapter mAdapter = new FirebaseRecyclerAdapter<ChatMessage, CMViewHolder>(ChatMessage.class, android.R.layout.two_line_list_item, CMViewHolder.class, ref) {
             @Override
             public void populateViewHolder(CMViewHolder chatMessageViewHolder, ChatMessage chatMessage, int position) {
                 chatMessageViewHolder.nameText.setText(chatMessage.getName());
