@@ -7,7 +7,7 @@ import android.widget.TextView;
 /**
  * Created by Vishant on 11-04-2016.
  */
-public static class CMViewHolder extends RecyclerView.ViewHolder {
+public class CMViewHolder extends RecyclerView.ViewHolder {
     TextView messageText;
     TextView nameText;
 
