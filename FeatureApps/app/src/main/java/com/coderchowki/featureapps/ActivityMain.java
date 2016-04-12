@@ -10,6 +10,8 @@ import com.firebase.ui.FirebaseRecyclerAdapter;
 
 public class ActivityMain extends AppCompatActivity {
 
+    FirebaseRecyclerAdapter mAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,7 +25,7 @@ public class ActivityMain extends AppCompatActivity {
         recycler.setHasFixedSize(true);
         recycler.setLayoutManager(new LinearLayoutManager(this));
 
-        FirebaseRecyclerAdapter mAdapter = new FirebaseRecyclerAdapter<ChatMessage, CMViewHolder>(ChatMessage.class, android.R.layout.two_line_list_item, CMViewHolder.class, ref) {
+        mAdapter = new FirebaseRecyclerAdapter<ChatMessage, CMViewHolder>(ChatMessage.class, android.R.layout.two_line_list_item, CMViewHolder.class, ref) {
             @Override
             public void populateViewHolder(CMViewHolder chatMessageViewHolder, ChatMessage chatMessage, int position) {
                 chatMessageViewHolder.nameText.setText(chatMessage.getName());
@@ -31,5 +33,11 @@ public class ActivityMain extends AppCompatActivity {
             }
         };
         recycler.setAdapter(mAdapter);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mAdapter.cleanup();
     }
 }
