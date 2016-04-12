@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">FeatureApps</string>
+
+    <string name="twitter_app_key">8JqKN9t2EKmwEeShWlBVawjOr</string>
+    <string name="twitter_app_secret">Y0QvC4PukDUDmkUisYla7nSiuRKQ6eDqlC8RrCIhDsOIs6nKkv</string>
 </resources>

@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.coderchowki.featureapps">
 
+    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -15,6 +17,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- Twitter Configuration -->
+        <activity android:name="com.firebase.ui.auth.twitter.TwitterPromptActivity" />
+        <meta-data
+            android:name="com.firebase.ui.TwitterKey"
+            android:value="@string/twitter_app_key"/>
+        <meta-data
+            android:name="com.firebase.ui.TwitterSecret"
+            android:value="@string/twitter_app_secret"/>
     </application>
 
 </manifest>
