@@ -11,6 +11,8 @@ import com.firebase.ui.FirebaseListAdapter;
 
 public class ActivityMain extends AppCompatActivity {
 
+    FirebaseListAdapter mAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,7 +23,7 @@ public class ActivityMain extends AppCompatActivity {
 
         Firebase ref = new Firebase("https://woodroom.firebaseio.com/msg");
 
-        FirebaseListAdapter mAdapter = new FirebaseListAdapter<ChatMessage>(this, ChatMessage.class, android.R.layout.two_line_list_item, ref) {
+        mAdapter = new FirebaseListAdapter<ChatMessage>(this, ChatMessage.class, android.R.layout.two_line_list_item, ref) {
             @Override
             protected void populateView(View view, ChatMessage chatMessage, int position) {
                 ((TextView) view.findViewById(android.R.id.text1)).setText(chatMessage.getName());
@@ -30,5 +32,11 @@ public class ActivityMain extends AppCompatActivity {
             }
         };
         list_message.setAdapter(mAdapter);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mAdapter.cleanup();
     }
 }
