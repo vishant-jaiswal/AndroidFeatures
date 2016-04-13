@@ -1,6 +1,11 @@
 <resources>
     <string name="app_name">FeatureApps</string>
 
-    <string name="twitter_app_key">8JqKN9t2EKmwEeShWlBVawjOr</string>
-    <string name="twitter_app_secret">Y0QvC4PukDUDmkUisYla7nSiuRKQ6eDqlC8RrCIhDsOIs6nKkv</string>
+    <string name="twitter_app_key">W8BU7DrDaxVBhSA57SgSx4mis</string>
+    <string name="twitter_app_secret">AoSa8vTgHrxlJgHfdVA99DVPOvYX7IcVd1zecBFiC6NorkeFdt</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="login_error">Login Error!</string>
 </resources>
