@@ -27,8 +27,8 @@ public class ActivityMain extends AppCompatActivity {
                 while (mProgressStatus < 100) {
                     mProgressStatus += 5;
                     try {
-                        // Sleep for 5 seconds
-                        Thread.sleep(1000);
+                        // Sleep for 1/20th sec
+                        Thread.sleep(1000/20);
                         Log.d(TAG, "sleep success" + mProgressStatus);
                     } catch (InterruptedException e) {
                         Log.d(TAG, "sleep failure");
