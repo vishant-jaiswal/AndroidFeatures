@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?><!--TODO: 4> Add a layout file for row layout in recyclerview -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="22dp"
+    android:background="@drawable/row_effect_selector"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/iv_imageicon"
+        android:layout_width="12dp"
+        android:layout_height="12dp"
+        android:layout_marginRight="22dp"
+        android:src="@drawable/ic_airport_shuttle"/>
+
+    <TextView
+        android:id="@+id/tv_what"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="What"/>
+
+    <TextView
+        android:id="@+id/tv_when"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="when"/>
+
+</LinearLayout>

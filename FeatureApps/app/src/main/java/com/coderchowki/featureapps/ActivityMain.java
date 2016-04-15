@@ -17,5 +17,7 @@ public class ActivityMain extends AppCompatActivity {
 
         //TODO: 3> get the refernce of an object of recyclerview
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        //TODO:7> now set adaptor for recycler view
+        recyclerView.setAdapter(new RV_Adaptor(this));
     }
 }
