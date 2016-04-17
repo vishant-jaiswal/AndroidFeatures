@@ -20,19 +20,11 @@ public class ActivityMain extends AppCompatActivity {
         Cursor cur = getContentResolver().query(uriSMSURI, null, null, null,null);
         String sms = "";
         while (cur.moveToNext()) {
-            sms += "From :" + cur.getString(2) + " : " + cur.getString(11)+"\n";
-            Log.i(TAG,""+cur.getString(1)+":"
-                    +cur.getString(2)+":"
-                    +cur.getString(3)+":"
-                    +cur.getString(4)+":"
-                    +cur.getString(5)+":"
-                    +cur.getString(6)+":"
-                    +cur.getString(7)+":"
-                    +cur.getString(8)+":"
-                    +cur.getString(9)+":"
-                    +cur.getString(10)+":"
-                    +cur.getString(11)
-                    +cur.getString(cur.getColumnIndexOrThrow("body"))+":"
+            sms += "From :" + cur.getString(2) + " : " + cur.getString(2)+"\n";
+            Log.i(TAG,""+cur.getString(cur.getColumnIndexOrThrow("person"))+"<-person:"
+                    +cur.getString(cur.getColumnIndexOrThrow("type"))+"<-type:"
+                    +cur.getString(cur.getColumnIndexOrThrow("subject"))+"<-subject:"
+                    +cur.getString(cur.getColumnIndexOrThrow("body"))+"<-body:"
                     +cur.getString(cur.getColumnIndexOrThrow("address"))+"\n");
         }
         view.setText(sms);
