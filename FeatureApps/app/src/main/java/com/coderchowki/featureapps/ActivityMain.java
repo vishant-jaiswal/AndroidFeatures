@@ -31,3 +31,5 @@ public class ActivityMain extends AppCompatActivity {
         setContentView(view);
     }
 }
+//TODO: following are the possible column value for SMS
+//_id , thread_id, address, person, date, protocol, read, status, type, reply_path_present, subject, body, service_center, locked, error_code, seen
