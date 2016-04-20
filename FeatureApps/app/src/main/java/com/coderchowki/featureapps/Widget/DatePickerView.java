@@ -3,8 +3,10 @@ package com.coderchowki.featureapps.Widget;
 import android.content.Context;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -90,6 +92,30 @@ public class DatePickerView extends LinearLayout implements View.OnTouchListener
         int month = mCalendar.get(Calendar.MONTH);
         int year = mCalendar.get(Calendar.YEAR);
         update(date, month, year, 0, 0, 0);
+    }
+
+    @Override
+    protected Parcelable onSaveInstanceState() {
+        Bundle bundle = new Bundle();
+        bundle.putParcelable("super",super.onSaveInstanceState());
+        bundle.putInt("Date",mCalendar.get(Calendar.DATE));
+        bundle.putInt("Month",mCalendar.get(Calendar.MONTH));
+        bundle.putInt("Year",mCalendar.get(Calendar.YEAR));
+        return bundle;
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Parcelable state) {
+        if(state instanceof Parcelable){
+            Bundle bundle = (Bundle) state;
+            state = bundle.getParcelable("super");
+            int date = bundle.getInt("Date");
+            int month = bundle.getInt("Month");
+            int year = bundle.getInt("Year");
+            update(date,month,year,0,0,0);
+        }
+
+        super.onRestoreInstanceState(state);
     }
 
     private void update(int date, int month, int year, int hour, int minute, int sec) {
