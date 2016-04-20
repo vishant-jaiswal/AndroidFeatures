@@ -41,7 +41,7 @@ public class DatePickerView extends LinearLayout implements View.OnTouchListener
     private Handler mHandler = new Handler(new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
-            Log.i(TAG,"message recieved by handler");
+           // Log.i(TAG,"message recieved by handler");
             if(mIncrement){
                 increment(mActiveTextViewId);
             }
@@ -132,32 +132,36 @@ public class DatePickerView extends LinearLayout implements View.OnTouchListener
 
             mActiveTextViewId = textView.getId();
             if (topDrawableHit(textView, topBound.height(), x, y)) {
-                Log.i(TAG, "in processEventFor topDrawableHit hit");
+              //  Log.i(TAG, "in processEventFor topDrawableHit hit");
                 if(isActionDown(event)) {
                     mIncrement = true;
                     increment(textView.getId());
                     mHandler.removeMessages(MESSAGE_WHAT);
                     mHandler.sendEmptyMessageDelayed(MESSAGE_WHAT,DELAY);
+                    toggledrawable(textView,true);
                 }
                 if(isActionUPorCancel(event)){
                     mIncrement = false;
+                    toggledrawable(textView,false);
                 }
 
             } else if (bottomDrawableHit(textView, bottomBound.height(), x, y)) {
-                Log.i(TAG, "in processEventFor bottomDrawableHit hit");
+              //  Log.i(TAG, "in processEventFor bottomDrawableHit hit");
                 if(isActionDown(event)) {
                     mDecrement = true;
                     decrement(textView.getId());
                     mHandler.removeMessages(MESSAGE_WHAT);
                     mHandler.sendEmptyMessageDelayed(MESSAGE_WHAT,DELAY);
+                    toggledrawable(textView,true);
                 }
                 if(isActionUPorCancel(event)){
                     mDecrement = false;
+                    toggledrawable(textView,false);
                 }
             } else {
                 mDecrement = false;
                 mIncrement = false;
-
+                toggledrawable(textView,false);
             }
         }
 
@@ -237,4 +241,22 @@ public class DatePickerView extends LinearLayout implements View.OnTouchListener
     private boolean hasDrawableBottom(Drawable[] drawables) {
         return drawables[BOTTOM] != null;
     }
+
+
+    private void toggledrawable(TextView textView ,boolean pressed){
+        if(pressed){
+            if(mIncrement){
+                textView.setCompoundDrawablesRelativeWithIntrinsicBounds(0,R.drawable.up_pressed,0,R.drawable.down_normal);
+            }
+            if(mDecrement){
+                Log.i(TAG,"toggledrawable down pressed");
+                textView.setCompoundDrawablesRelativeWithIntrinsicBounds(0,R.drawable.up_normal,0,R.drawable.down_pressed);
+            }
+
+        }
+        else{
+            textView.setCompoundDrawablesRelativeWithIntrinsicBounds(0,R.drawable.up_normal,0,R.drawable.down_normal);
+        }
+    }
 }
+
