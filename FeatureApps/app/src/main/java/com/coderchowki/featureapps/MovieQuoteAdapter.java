@@ -62,8 +62,9 @@ public class MovieQuoteAdapter extends RecyclerView.Adapter<MovieQuoteAdapter.Vi
 
     public void remove(MovieQuote movieQuote) {
         //TODO: Remove the next line(s) and use Firebase instead
-        mMovieQuotes.remove(movieQuote);
-        notifyDataSetChanged();
+        mFbMovieQuoteRef.child(movieQuote.getKey()).removeValue();
+       // mMovieQuotes.remove(movieQuote);
+        //notifyDataSetChanged();
     }
 
 
@@ -118,6 +119,14 @@ public class MovieQuoteAdapter extends RecyclerView.Adapter<MovieQuoteAdapter.Vi
 
         @Override
         public void onChildRemoved(DataSnapshot dataSnapshot) {
+            String key = dataSnapshot.getKey();
+            for (MovieQuote mq : mMovieQuotes){
+                if(key.equals(mq.getKey())){
+                    mMovieQuotes.remove(mq);
+                    notifyDataSetChanged();
+                    break;
+                }
+            }
 
         }
 
