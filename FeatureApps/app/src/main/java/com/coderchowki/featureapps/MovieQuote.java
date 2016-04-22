@@ -12,6 +12,9 @@ public class MovieQuote {
     @JsonIgnore
     private String key;
 
+    public MovieQuote() {
+    }
+
 
     public String getKey() {
         return key;

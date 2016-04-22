@@ -7,7 +7,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.firebase.client.ChildEventListener;
+import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +30,7 @@ public class MovieQuoteAdapter extends RecyclerView.Adapter<MovieQuoteAdapter.Vi
         mMovieQuotes = new ArrayList<>();
         Firebase.setAndroidContext(context);
         mFbMovieQuoteRef = new Firebase(QUOTES_PATH);
+        mFbMovieQuoteRef.addChildEventListener(new MovieQuotesEventListener());
     }
 
     @Override
@@ -98,4 +102,33 @@ public class MovieQuoteAdapter extends RecyclerView.Adapter<MovieQuoteAdapter.Vi
     }
 
 
+    private class MovieQuotesEventListener implements ChildEventListener {
+        @Override
+        public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+            MovieQuote movieQuote = dataSnapshot.getValue(MovieQuote.class);
+            movieQuote.setKey(dataSnapshot.getKey());
+            mMovieQuotes.add(0,movieQuote);
+            notifyDataSetChanged();
+        }
+
+        @Override
+        public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+        }
+
+        @Override
+        public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+        }
+
+        @Override
+        public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+        }
+
+        @Override
+        public void onCancelled(FirebaseError firebaseError) {
+
+        }
+    }
 }
