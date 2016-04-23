@@ -15,6 +15,9 @@ import android.widget.TextView;
 
 public class ActivityMain extends AppCompatActivity {
 
+    public static final String EXTRA_MESSAGE ="EXTRA_MESSAGE";
+    public static final String EXTRA_COLOR ="EXTRA_COLOR";
+
     private RelativeLayout mLayout;
     private TextView mTextView;
     private String mMessage = "This is your phone. Please rescue me!";
@@ -62,6 +65,10 @@ public class ActivityMain extends AppCompatActivity {
 
             case R.id.action_change_color:
                 // TODO: Launch the InputActivity to get a result
+                Intent intent_InputActivity = new Intent(this,InputActivity.class);
+                intent_InputActivity.putExtra(EXTRA_MESSAGE,mMessage);
+                intent_InputActivity.putExtra(EXTRA_COLOR,mBackgroundColor);
+                startActivity(intent_InputActivity);
 
                 return true;
 
