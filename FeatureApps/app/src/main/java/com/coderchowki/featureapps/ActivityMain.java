@@ -1,5 +1,6 @@
 package com.coderchowki.featureapps;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -17,6 +18,7 @@ public class ActivityMain extends AppCompatActivity {
 
     public static final String EXTRA_MESSAGE ="EXTRA_MESSAGE";
     public static final String EXTRA_COLOR ="EXTRA_COLOR";
+    private static final int REQUEST_CODE_INPUT_ACTIVITY=1;
 
     private RelativeLayout mLayout;
     private TextView mTextView;
@@ -68,7 +70,7 @@ public class ActivityMain extends AppCompatActivity {
                 Intent intent_InputActivity = new Intent(this,InputActivity.class);
                 intent_InputActivity.putExtra(EXTRA_MESSAGE,mMessage);
                 intent_InputActivity.putExtra(EXTRA_COLOR,mBackgroundColor);
-                startActivity(intent_InputActivity);
+                startActivityForResult(intent_InputActivity,REQUEST_CODE_INPUT_ACTIVITY);
 
                 return true;
 
@@ -77,6 +79,16 @@ public class ActivityMain extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == REQUEST_CODE_INPUT_ACTIVITY && resultCode == Activity.RESULT_OK){
+            //TODO:get the message from Input Activity Here
+            mMessage = data.getStringExtra(EXTRA_MESSAGE);
+            mBackgroundColor = data.getIntExtra(EXTRA_COLOR,Color.GRAY);
+            updateUI();
+        }
     }
 
     private void updateUI() {

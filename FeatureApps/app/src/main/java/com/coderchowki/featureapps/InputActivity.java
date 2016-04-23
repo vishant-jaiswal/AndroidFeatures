@@ -1,5 +1,6 @@
 package com.coderchowki.featureapps;
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -70,6 +71,11 @@ public class InputActivity extends AppCompatActivity {
                         mMessage = mEditText.getText().toString();
                         updateUI();
 						// TODO: Use an intent to send info back to activity that called this one for a result.
+                        Intent intent = new Intent();
+                        intent.putExtra(ActivityMain.EXTRA_MESSAGE,mMessage);
+                        intent.putExtra(ActivityMain.EXTRA_COLOR,mCurrentBackgroundColor);
+                        setResult(Activity.RESULT_OK,intent);
+                        finish();
 					   
                     }
                 })
