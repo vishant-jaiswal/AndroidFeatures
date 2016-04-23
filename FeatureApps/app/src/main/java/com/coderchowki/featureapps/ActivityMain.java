@@ -3,6 +3,7 @@ package com.coderchowki.featureapps;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -37,6 +38,7 @@ public class ActivityMain extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // TODO: Send an email with the message field as the body
+                sendEmail();
             }
         });
 
@@ -46,6 +48,18 @@ public class ActivityMain extends AppCompatActivity {
 
         // Set color and text
         updateUI();
+    }
+
+    private void sendEmail() {
+        Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
+        emailIntent.setData(Uri.parse("mailto:"));
+        emailIntent.putExtra(Intent.EXTRA_EMAIL,"theonly1@gmail.com");
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT,"from ActivityAndFragment Branch");
+        emailIntent.putExtra(Intent.EXTRA_TEXT,mMessage);
+        if(emailIntent.resolveActivity(getPackageManager()) != null){
+            startActivity(emailIntent);
+
+        }
     }
 
     @Override
