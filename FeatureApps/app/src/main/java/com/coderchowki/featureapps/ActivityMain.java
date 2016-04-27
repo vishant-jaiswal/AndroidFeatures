@@ -23,7 +23,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 
 import java.io.IOException;
 
-public class ActivityMain extends AppCompatActivity implements FragmentLogin.OnLoginListener, GoogleApiClient.OnConnectionFailedListener {
+public class ActivityMain extends AppCompatActivity implements FragmentLogin.OnLoginListener, GoogleApiClient.OnConnectionFailedListener , FragmentHome.OnLogoutListener {
 
     private static final int REQUEST_CODE_GOOGLE_LOGIN = 1;
     private GoogleApiClient mGoogleApiClient;
@@ -103,6 +103,21 @@ public class ActivityMain extends AppCompatActivity implements FragmentLogin.OnL
     private void showLoginError(String message) {
         FragmentLogin loginFragment = (FragmentLogin) getSupportFragmentManager().findFragmentByTag("Login");
         loginFragment.onLoginError(message);
+    }
+
+    @Override
+    public void onLogin(String email, String password) {
+        //TODO: Log user in with username & password
+        Firebase firebase = new Firebase(Constants.FIREBASE_URL);
+        firebase.authWithPassword(email,password,new MyAuthResultHandler());
+    }
+
+    @Override
+    public void onLogout() {
+        //TODO: Log the user out.
+        Firebase firebase = new Firebase(Constants.FIREBASE_URL);
+        firebase.unauth();
+        switchToFragmentLogin();
     }
 
     @Override
