@@ -7,10 +7,13 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.List;
 
 public class ActivityMain extends Activity implements SensorEventListener {
     private SensorManager sensorManager;
@@ -36,6 +39,10 @@ public class ActivityMain extends Activity implements SensorEventListener {
         z_view = (TextView) findViewById(R.id.z_textView);
 
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
+
+        // List of Sensors Available
+        List<Sensor> msensorList = sensorManager.getSensorList(Sensor.TYPE_ALL);
+
         lastUpdate = System.currentTimeMillis();
     }
 
@@ -61,9 +68,18 @@ public class ActivityMain extends Activity implements SensorEventListener {
         y_view.setText(Float.toString(y));
         z_view.setText(Float.toString(z));
 
-        if (accelationSquareRoot >= 2) //
+        if (accelationSquareRoot >= 8) //
         {
-            if (actualTime - lastUpdate < 200) {
+            Log.i("bhencho","\n accl squar root : " + Float.toString(accelationSquareRoot));
+            Log.i("bhencho","\n x value : " + Float.toString(x));
+            Log.i("bhencho","\n y value : " + Float.toString(y));
+            Log.i("bhencho","\n z value : " + Float.toString(z));
+
+            float timediff = actualTime - lastUpdate;
+            Log.i("bhencho","\n timediff :" + Float.toString(timediff) );
+
+            if (actualTime - lastUpdate < 600) {
+                Log.i("bhencho","\n actualTime - lastUpdate > 500" + (actualTime - lastUpdate) );
                 return;
             }
             lastUpdate = actualTime;
