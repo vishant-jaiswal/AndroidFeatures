@@ -3,6 +3,7 @@ package com.coderchowki.featureapps;
 /**
  * Created by Vishant on 23-07-2016.
  */
+
 import android.content.Context;
 import android.location.Location;
 import android.location.LocationListener;
@@ -40,6 +41,7 @@ public class MyLocation {
             lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListenerNetwork);
         timer1=new Timer();
         timer1.schedule(new GetLastLocation(), 20000);
+
         return true;
     }
 
