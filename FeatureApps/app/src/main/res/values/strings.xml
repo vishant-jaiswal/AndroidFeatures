@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">FeatureApps</string>
+    <string name="bt_internal_cache">Internal Cache</string>
+    <string name="bt_external_cache">External Cache</string>
+    <string name="bt_external_private">SdCard Private</string>
+    <string name="bt_external_public">SdCard Public</string>
+    <string name="bt_next">Next</string>
+    <string name="bt_previous">Previous</string>
 </resources>
