@@ -1,16 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.coderchowki.featureapps.ActivityMain">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World Dear!" />
-</RelativeLayout>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.coderchowki.featureapps.ActivityMain"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="8dp">
+
+        <EditText
+            android:id="@+id/et_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/name" />
+
+        <EditText
+            android:id="@+id/et_standard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/standard" />
+
+        <EditText
+            android:id="@+id/et_school"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/school" />
+
+        <CheckBox
+            android:id="@+id/chk_english"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/english" />
+
+        <CheckBox
+            android:id="@+id/chk_hindi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/hindi" />
+
+        <CheckBox
+            android:id="@+id/chk_math"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/math" />
+
+        <CheckBox
+            android:id="@+id/chk_science"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/science" />
+
+        <Button
+            android:id="@+id/btn_save"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/save"/>
+
+
+    </LinearLayout>
+</ScrollView>
