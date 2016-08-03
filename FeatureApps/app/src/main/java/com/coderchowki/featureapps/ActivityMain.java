@@ -8,9 +8,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 
 public class ActivityMain extends AppCompatActivity implements View.OnClickListener{
@@ -102,6 +104,7 @@ public class ActivityMain extends AppCompatActivity implements View.OnClickListe
 
         try {
             fileOutputStream = new FileOutputStream(myFile);
+            appendLog(data);
             fileOutputStream.write(data.getBytes());
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -123,5 +126,38 @@ public class ActivityMain extends AppCompatActivity implements View.OnClickListe
         Intent intent = new Intent(this,ActivityLoad.class);
         startActivity(intent);
 
+    }
+
+
+    public void appendLog(String text)
+    {
+        File folder = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
+        File logFile = new File(folder,"myfile4.txt");
+        //File logFile = new File("sdcard/log.file");
+        if (!logFile.exists())
+        {
+            try
+            {
+                logFile.createNewFile();
+            }
+            catch (IOException e)
+            {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+        try
+        {
+            //BufferedWriter for performance, true to set append to file flag
+            BufferedWriter buf = new BufferedWriter(new FileWriter(logFile, true));
+            buf.append(text);
+            buf.newLine();
+            buf.close();
+        }
+        catch (IOException e)
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 }
