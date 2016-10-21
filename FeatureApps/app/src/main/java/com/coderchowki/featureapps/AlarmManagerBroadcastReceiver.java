@@ -8,6 +8,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import java.text.Format;
@@ -32,6 +33,7 @@ public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
         msgStr.append(formatter.format(new Date()));
 
         Toast.makeText(context, msgStr, Toast.LENGTH_LONG).show();
+        Log.i("AlarmTest",msgStr.toString());
 
         //Release the lock
        // wl.release();
