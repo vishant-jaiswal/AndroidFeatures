@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "291223286349",
+    "firebase_url": "https://featureapp-1e09a.firebaseio.com",
+    "project_id": "featureapp-1e09a",
+    "storage_bucket": "featureapp-1e09a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:291223286349:android:f94e30074ca54a62",
+        "android_client_info": {
+          "package_name": "com.coderchowki.featureapps"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "291223286349-svrnmpfknhjcn7d1aur893ped0h19a3n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDfbmTvwesUZc0X3Q0bdfygUTIdZ39AWWk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
