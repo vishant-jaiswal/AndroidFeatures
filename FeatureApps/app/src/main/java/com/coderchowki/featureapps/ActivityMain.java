@@ -17,21 +17,27 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
 
-public class ActivityMain extends AppCompatActivity implements View.OnClickListener {
+public class ActivityMain extends AppCompatActivity implements View.OnClickListener, OnCompleteListener<Void> {
 
     ImageView iv_UserPic;
     private final int ImagetCaptureRequestCode = 786;
     private final int REQUEST_CODE_ASK_PERMISSIONS = 787;
+
+    FirebaseRemoteConfig remoteConfig;
+    FirebaseStorage storage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,9 +62,12 @@ public class ActivityMain extends AppCompatActivity implements View.OnClickListe
         img.compress(Bitmap.CompressFormat.JPEG, 100, baos);
         byte[] data = baos.toByteArray();
 
-        FirebaseStorage storage = FirebaseStorage.getInstance();
+        storage = FirebaseStorage.getInstance();
+        remoteConfig = FirebaseRemoteConfig.getInstance();
+        remoteConfig.setDefaults(R.xml.dynamic_config);
+        remoteConfig.fetch(0).addOnCompleteListener(this);
         StorageReference storageRef = storage.getReferenceFromUrl("gs://featureapp-1e09a.appspot.com");
-        StorageReference spaceRef = storageRef.child("images/space.jpg");
+        StorageReference spaceRef = storageRef.child(remoteConfig.getString("storage_location"));
 
         UploadTask uploadTask = spaceRef.putBytes(data);
         uploadTask.addOnFailureListener(new OnFailureListener() {
@@ -134,5 +143,15 @@ public class ActivityMain extends AppCompatActivity implements View.OnClickListe
 
         captureImage();// init the contact list
 
+    }
+
+    @Override
+    public void onComplete(@NonNull Task<Void> task) {
+        if(task.isSuccessful()){
+            remoteConfig.activateFetched();
+            Log.d("firebaseconfig", "Fetch Succeeded");
+        }else{
+            Log.d("firebaseconfig", "Fetch failed");
+        }
     }
 }
